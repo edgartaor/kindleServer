@@ -64,5 +64,5 @@ USE_READABILITY = True
 
 ```
 
-You can also customize the font size, font family and any aspect in the templete files
+You can also customize the font size, font family and any aspect in the template files
 
