@@ -9,6 +9,9 @@ This app does not use Javascript or any database (the files themselves are the d
 *Disclaimer*: I use this app only accessible in my LAN, running
 `flask run -h 192.168.1.100 -p 8000` is enough for my use case. If  you need a public instance over the Internet, please setup a proper web server.
 
+## Demo
+https://user-images.githubusercontent.com/430438/158122704-8fe414f9-260e-431d-9d6c-29463062fd7e.mp4
+
 ## Install
 
 ```bash
