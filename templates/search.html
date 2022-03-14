@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+<a style="font-size: 2em;" href="/">Back to main page</a>
+  <div style="font-size: 2em;">Search result for  
+    <form action="/search" method="get">
+      <input style="font-size: 1em;" name="query" value="{{query}}" type="text">
+    </form>
+  </div>
+
+
+{% include 'list.html' %}
+
+</body>
+
+{% endblock %}

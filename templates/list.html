@@ -1,0 +1,86 @@
+<style>
+    .webpage{
+        font-size: 1.9em;
+        /*font-family: Georgia, 'Times New Roman', Times, serif;*/
+
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border: 0;
+        border-top: 2px solid rgb(109, 109, 109);
+        border-bottom: 2px solid rgb(107, 107, 107);
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .tools{
+        flex: 1;
+      }
+      
+      .title{
+        flex: 1 100%;
+        border-bottom: 2px dashed rgb(107, 107, 107);
+      
+      }
+
+
+      .pagination-page-info {
+        padding: .6em;
+        padding-left: 0;
+        margin: .5em;
+        margin-left: 0;
+        font-size: 1.3em;
+    }
+    .pagination-page-info b {
+        color: black;
+        background: #6aa6ed;
+        padding-left: 2px;
+        padding: .1em .25em;
+        font-size: 1em;
+    }
+
+    .page-link {
+      position: relative;
+      display: block;
+      padding: .5rem .75rem;
+      margin-left: -1px;
+      line-height: 1.25;
+      color: #007bff;
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+    }
+
+     
+
+    .pagination {
+      display: -ms-flexbox;
+      display: flex;
+      padding-left: 0;
+      list-style: none;
+      border-radius: .55rem;
+      
+    }
+
+    .page-item{
+      list-style-type: none;
+      font-size: 2em;
+      border-top: 2px solid rgb(109, 109, 109);
+      border-bottom: 2px solid rgb(107, 107, 107);
+    }
+</style>
+
+{{ pagination.info }}
+
+{% if files %}
+{% for file in files %}
+<div class="webpage">
+  <div class="title"><a href="file/{{file}}"> {{file}}</a></div>
+  <div class="tools"><a href="/read/{{file}}">>Read mode</a></div>
+</div>
+{% endfor %}
+{% else %}
+<h1>There is no files to show</h1>
+{% endif %}
+
+{{ pagination.info }}
+{{ pagination.links }}

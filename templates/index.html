@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %} 
+<body>
+
+  <div style="font-size: 2em;">
+    <form action="/search" method="get">
+      <label for="query">Search:</label>
+      <input style="font-size: 1em;" name="query" value="{{query}}" type="text">
+    </form>
+  </div>
+
+
+{% include 'list.html' %}
+
+</body>
+
+{% endblock %}
