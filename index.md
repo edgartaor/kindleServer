@@ -1,37 +1,68 @@
-## Welcome to GitHub Pages
+# WebServer for Kindle
 
-You can use the [editor on GitHub](https://github.com/edgartaor/kindleServer/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+I save articles to HTML files with  [TagSpaces](https://github.com/tagspaces/browser-extensions) or [SingleFile](https://github.com/gildas-lormeau/SingleFile) to read them later but I could not find a way to serve them easily to a Kindle Paperwhite and read them there. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This project serve HTML files (and few more) saved in your computer with a UI suitable for Kindle web browser. On top of that, it include a Read Mode (thanks to [ReadabiliPy](https://github.com/alan-turing-institute/ReadabiliPy))  to display the text in a comfortable size without have to use the 'Article Mode' in Kindle web browser.
 
-### Markdown
+This app does not use Javascript or any database (the files themselves are the database). To serve the file it uses [Whitenoise](https://whitenoise.evans.io/en/stable/#), so it does not need a nginx o apache server.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+*Disclaimer*: I use this app only accessible in my LAN, running
+`flask run -h 192.168.1.100 -p 8000` is enough for my use case. If  you need a public instance over the Internet, please setup a proper web server.
 
-```markdown
-Syntax highlighted code block
+## Demo
+https://user-images.githubusercontent.com/430438/158122704-8fe414f9-260e-431d-9d6c-29463062fd7e.mp4
 
-# Header 1
-## Header 2
-### Header 3
+## Install
 
-- Bulleted
-- List
+```bash
+git clone https://github.com/edgartaor/kindleServer.git
+cd kindleServer
+pip install -r requirements.txt
+flask run -h 0.0.0.0 -p 8000
+```
+**Important**: In the `config.py` file change `SAVED_WEBPAGES_DIR` to the path where the HTML files are stored.
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+## Customize
+You can customize some aspects in the `config.py` file. 
 
-[Link](url) and ![Image](src)
+```python
+# The files that are gonna be listed, 
+# compatibility depends on the browser and the device
+# Usually if a file it is not compatible in the browser
+# it will prompt to download 
+# Kindle Paperwhite currently can download .AZW, .PRC and .MOBI with the web browser
+# and can display html and txt (pdf is not compatible though)
+# other files had not being tested
+FILE_TYPES_ALLOWED = ('html', 'txt', 'md', 'pdf', "azw3", "azw",
+                        'prc', 'mobi')
+
+# Files that are compatible with the Read Mode
+# It support html files and any plain text files
+READ_MODE_FILES_COMPATIBLE = ('html', 'txt', 'md')
+
+# Path where the webpages are saved
+SAVED_WEBPAGES_DIR = "/mnt/c/Users/Edgar/Documents/Saved webpages/"
+
+# Number of files to show per page
+PER_PAGE = 10
+
+# SORT_BY options are 
+# 'CREATION' = Creation date
+# 'MODIFIED' = Last modification date
+# 'FILENAME' = Alphabetical order
+SORT_BY = 'CREATION'
+
+# Reverse the order of the files after being sorted
+REVERSE_ORDER = True
+
+# Set USE_READABILITY to True if you have a nodejs instance installed
+# If mozilla/readability is not found it will fallback to a pure-python parser included in ReadabiliPy
+# https://github.com/alan-turing-institute/ReadabiliPy#installation 
+USE_READABILITY = True
+
+
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+You can also customize the font size, font family and any aspect in the template files
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/edgartaor/kindleServer/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
